@@ -24,6 +24,9 @@
     sudo systemctl status mariadb
     mysql -V
 
+    curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+    sudo apt install mariadb-server
+
     # wget https://mirror.kku.ac.th/mariadb/mariadb-10.5.11/bintar-linux-systemd-x86_64/mariadb-10.5.11-linux-systemd-x86_64.tar.gz
 
 # python  ``

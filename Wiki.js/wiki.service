@@ -7,7 +7,7 @@ Type=simple
 ExecStart=/usr/bin/node server
 Restart=always
 Environment=NODE_ENV=production
-WorkingDirectory=/var/wiki
+WorkingDirectory=/opt/wiki-js/
 
 [Install]
 WantedBy=multi-user.target

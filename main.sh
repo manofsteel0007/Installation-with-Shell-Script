@@ -10,14 +10,8 @@ do
         echo Postgres installation completed
     elif [ $var = "b" ]
     then
-        sudo apt-get install software-properties-common
-        sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-        sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.ubuntu-tw.org/mirror/mariadb/repo/10.3/ubuntu xenial main'
-        sudo apt-get update
-        sudo apt-get install mariadb-server-10.3
-        sudo apt-get install libmysqlclient-dev
-        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/MariaDB/my.cnf?token=AP6NT4UOBQNINTRY2ZTO343A5FAGM -O /etc/mysql/my.cnf
-        sudo service mysql restart
+        curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+        sudo apt install mariadb-server
         echo MariaDB installation completed
     elif [ $var = "c" ]
     then
@@ -29,9 +23,9 @@ do
     elif [ $var = "d"]
     then 
         wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-        export NVM_DIR="$HOME/.nvm"  
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+        echo "export NVM_DIR=\"$HOME/.nvm\" \
+        [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" \
+        [ -s \"$NVM_DIR/bash_completion\" ] && \. \"$NVM_DIR/bash_completion\" " >>/home/ubuntu/.bashrc 
         nvm install 12
         npm install -g yarn
         echo NVM, nodejs, yarn installation completed
@@ -47,6 +41,10 @@ do
         sudo tar xzf /opt/wiki-js/wiki-js.tar.gz -C /opt/wiki-js/
         sudo rm /opt/wiki-js/wiki-js.tar.gz
         sudo mv /opt/wiki-js/config.sample.yml /opt/wiki-js/config.yml
+        sudo apt install nodejs
+        npm rebuild sqlite3
+        sudo node /opt/wiki-js/server
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Wiki.js/wiki.service?token=AP6NT4XSFMTLXG3UVFUACATA5FKES -O /etc/systemd/system/wiki.service
     fi
 done
 
