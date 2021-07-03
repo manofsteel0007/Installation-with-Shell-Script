@@ -1,0 +1,28 @@
+https://nodejs.org/dist/v14.17.1/node-v14.17.1-linux-x64.tar.xz
+
+postgresql
+https://www.postgresql.org/download/linux/ubuntu/
+
+
+https://stackoverflow.com/questions/255898/how-to-iterate-over-arguments-in-a-bash-script
+
+code-server-cloud
+https://www.digitalocean.com/community/tutorials/how-to-set-up-the-code-server-cloud-ide-platform-on-ubuntu-20-04
+
+node
+https://www.geeksforgeeks.org/installation-of-node-js-on-linux/
+
+nvm
+https://nbanzyme.medium.com/easy-way-to-install-nvm-on-ubuntu-18-04-2cfb19ee5391
+
+wiki.js
+https://docs.requarks.io/install/linux 
+
+maddy email server
+https://maddy.email/tutorials/setting-up/
+
+ufw firewall
+https://www.tecmint.com/setup-ufw-firewall-on-ubuntu-and-debian/
+
+bookstackapp
+https://www.bookstackapp.com/docs/admin/installation/
