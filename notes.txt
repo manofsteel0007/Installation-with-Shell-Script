@@ -3,6 +3,8 @@ https://nodejs.org/dist/v14.17.1/node-v14.17.1-linux-x64.tar.xz
 postgresql
 https://www.postgresql.org/download/linux/ubuntu/
 
+mariadb
+https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04
 
 https://stackoverflow.com/questions/255898/how-to-iterate-over-arguments-in-a-bash-script
 

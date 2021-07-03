@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# postgres
+# postgres  ``
 
     sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
     sudo apt-get update
     sudo apt-get -y install postgresql
 
-#  mariaDB
+#  mariaDB  ``
 
     sudo apt-get install software-properties-common
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
@@ -15,11 +15,18 @@
     sudo apt-get update
     sudo apt-get install mariadb-server-10.3
     sudo apt-get install libmysqlclient-dev
-    sudo wget LINK -O /etc/mysql/my.cnf
+    sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/MariaDB/my.cnf?token=AP6NT4UOBQNINTRY2ZTO343A5FAGM -O /etc/mysql/my.cnf
     sudo service mysql restart
+
+    sudo apt update
+    sudo apt install mariadb-server
+    sudo mysql_secure_installation
+    sudo systemctl status mariadb
+    mysql -V
+
     # wget https://mirror.kku.ac.th/mariadb/mariadb-10.5.11/bintar-linux-systemd-x86_64/mariadb-10.5.11-linux-systemd-x86_64.tar.gz
 
-# python 
+# python  ``
 
     sudo apt update
     sudo apt install software-properties-common
@@ -27,20 +34,20 @@
     sudo apt update
     sudo apt install python3.8
 
-# node
+# node` ``
 
     sudo apt install nodejs
     sudo apt install npm
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash –
 
-# nvm
+# nvm ``
 
     wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
     export NVM_DIR="$HOME/.nvm"  
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# phpmyadmin 
+# phpmyadmin  ``
 
     sudo apt update
     sudo apt install phpmyadmin php-mbstring php-gettext
