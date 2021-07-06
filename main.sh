@@ -31,7 +31,7 @@ do
         echo NVM, nodejs, yarn installation completed
     elif [ $var = "e" ]
     then 
-        sudo apt install ufw
+        sudo apt -y install ufw
         sudo ufw status verbose
         sudo ufw enable
         sudo ufw allow ssh
@@ -45,14 +45,16 @@ do
         sudo mv /opt/wiki-js/config.sample.yml /opt/wiki-js/config.yml
         sudo apt install nodejs
         npm rebuild sqlite3
-        sudo node /opt/wiki-js/server
+        # sudo node /opt/wiki-js/server
         sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Wiki.js/wiki.service?token=AP6NT4XSFMTLXG3UVFUACATA5FKES -O /etc/systemd/system/wiki.service
+        sudo systemctl daemon-reload
+        sudo systemctl start wiki
         echo Wiki-js installation completed
     elif [ $var = "g" ]
     then 
-        sudo apt install software-properties-common
+        sudo apt -y install software-properties-common
         sudo add-apt-repository ppa:ondrej/php
-        sudo apt install php7.3 php7.3-common php7.3-opcache php7.3-cli php7.3-gd php7.3-curl php7.3-mysql
+        sudo apt -y install php7.3 php7.3-common php7.3-opcache php7.3-cli php7.3-gd php7.3-curl php7.3-mysql
         echo PHP installation completed
     elif [ $var = "h" ]
     then 
@@ -64,13 +66,13 @@ do
     then 
         sudo mkdir /opt/maddy/ 
         sudo wget https://github.com/foxcpp/maddy/releases/download/v0.4.4/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
-        sudo apt install zstd
+        sudo apt -y install zstd
         sudo unzstd /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
         sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
         sudo tar -xvf /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar -C /opt/maddy/
         sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar
         sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf 
-        sudo wget LINK -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
+        sudo wget https://github.com/manofsteel0007/Installation-with-Shell-Script/raw/master/Maddy/maddy.conf -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
         sudo mkdir /etc/maddy/
         sudo mkdir /etc/maddy/certs/
         sudo hostnamectl set-hostname ubunut.localhost
@@ -89,6 +91,30 @@ do
         sudo systemctl daemon-reload
         sudo systemctl start maddy
         echo Maddy-Server installation completed
+    elif [ $var = "j" ]
+    then 
+        sudo apt update
+        sudo apt -y install nginx
+        sudo mkdir /opt/code-server/
+        sudo wget https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-linux-amd64.tar.gz -O /opt/code-server/code-server-3.3.1-linux-amd64.tar.gz
+        sudo tar -xvf code-server-3.3.1-linux-amd64.tar.gz -C /opt/code-server/
+        sudo rm /opt/code-server/code-server-3.3.1-linux-amd64.tar.gz
+        sudo sudo cp -r /opt/code-server/code-server-3.3.1-linux-amd64 /usr/lib/code-server
+        sudo ln -s /usr/lib/code-server/bin/code-server /usr/bin/code-server
+        sudo mkdir /var/lib/code-server
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Code-Server/code-server.service?token=AP6NT4TBAEHH4M4RTBBSX5LA5WPO4 -O /lib/systemd/system/code-server.service
+        sudo systemctl start code-server
+        sudo systemctl enable code-server
+        sudo ufw allow 8080/tcp
+
+        # sudo wget "LINK" -O /etc/nginx/sites-available/code-server.conf
+        # sudo ln -s /etc/nginx/sites-available/code-server.conf /etc/nginx/sites-enabled/code-server.conf
+
+        # sudo apt install certbot python3-certbot-nginx
+        # sudo ufw allow https
+        # sudo ufw reload
+        # sudo certbot --nginx -d code-server."your-domain"
+        echo Code Server installation completed
     fi
 done
 

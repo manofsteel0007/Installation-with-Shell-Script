@@ -13,10 +13,42 @@ returns active
 
 **MariaDB - b**
 
-During this installation you'll be prompted to set the MySQL root password. If you are not prompted, you'll have to initialize the MySQL server setup yourself. You can do that by running the command
+MariaDB will be installed   
 
-    mysql_secure_installation
+**Python3 - c**
 
-It is really important that you remember this password, since it'll be useful later on.
+Python3 will be installed   
 
+**Node version manager & Node.js - d**
 
+NVM and Node.js will be installed   
+
+**UFW - e**
+
+UFW will be installed, for more UFW related info visit https://www.tecmint.com/setup-ufw-firewall-on-ubuntu-and-debian/
+
+**Wiki.js - f**
+
+Wiki.js will be installed
+
+    sudo systemctl status wiki
+
+**PHP - g**
+
+PHP will be installed   
+
+**BookStackApp - h**
+
+BookStackApp will be installed   
+
+**Maddy-Server - i**
+
+Maddy-Server will be installed   
+
+    sudo systemctl status maddy
+
+**Code-Server - j**
+
+Code-Server will be installed  
+
+    sudo systemctl status code-server
