@@ -57,22 +57,39 @@
 
 # maddy-server
 
-    wget https://github.com/foxcpp/maddy/releases/download/v0.4.4/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
+    sudo mkdir /opt/maddy/ 
+    sudo wget https://github.com/foxcpp/maddy/releases/download/v0.4.4/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
     sudo apt install zstd
-    unzstd maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
-    sudo rm maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
-    tar -xvf maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar
-    sudo rm maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar
-    cd maddy-0.4.4+dcdf4a7-x86_64-linux-musl
-    sudo mv ./maddyctl /usr/local/bin/
-    sudo mv ./maddy /usr/local/bin/
-    cd systemd
-    sudo mv ./maddy.service /etc/systemd/system/
-    sudo mv ./maddy@.service /etc/systemd/system/
-    sudo systemctl daemon-reload
+    sudo unzstd /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
+    sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
+    sudo tar -xvf /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar -C /opt/maddy/
+    sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar
+    sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf 
+    sudo wget LINK -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
+    sudo mkdir /etc/maddy/
+    sudo mkdir /etc/maddy/certs/
+    sudo hostnamectl set-hostname ubunut.localhost
+    openssl req -new -x509 -days 365 -nodes \
+    -out /etc/maddy/certs/fullchain.pem \
+    -keyout /etc/maddy/certs/private.pem \
+    -subj "/C=IN/ST=TamilNadu/L=India/O=IT/CN= ubuntu@localhost"
+
+    sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddyctl /usr/local/bin/
+    sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy /usr/local/bin/
+    sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/systemd/maddy.service /etc/systemd/system/
+    sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/systemd/maddy@.service /etc/systemd/system/
+    
     sudo useradd -mrU -s /sbin/nologin -d /var/lib/maddy -c "maddy mail server" maddy
 
+    sudo systemctl daemon-reload
+    sudo systemctl start maddy
+
     tls certificate adding
+
+    openssl req -new -x509 -days 365 -nodes \
+    -out /etc/maddy/certs/fullchain.pem \
+    -keyout /etc/maddy/certs/private.pem \
+    -subj "/C=IN/ST=TamilNadu/L=India/O=IT/CN= ubuntu@localhost"
 
 # ufw
 
@@ -134,3 +151,6 @@
 
     sudo apt update
     sudo apt install wordpress php libapache2-mod-php mysql-server php-mysql
+
+    echo  " password \n SELECT * FROM USER" | mysql -u root -p
+    
