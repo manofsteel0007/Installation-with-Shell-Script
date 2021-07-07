@@ -1,0 +1,11 @@
+[Unit]
+Description=Maddy Mail server
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=sudo /etc/maddy/maddy --config /etc/maddy/maddy.conf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
