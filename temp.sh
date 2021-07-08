@@ -53,8 +53,10 @@
 # phpmyadmin  ``
 
     sudo apt update
-    sudo apt install phpmyadmin php-mbstring php-gettext
-
+    sudo apt install phpmyadmin 
+    sudo ln -s /usr/share/phpmyadmin /var/www/html
+    sudo systemctl restart apache2
+    
 # maddy-server
 
     sudo mkdir /opt/maddy/ 
@@ -149,8 +151,63 @@
 
 # wordpress
 
+    sudo su 
+    mysql -u root -h localhost -p
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+    FLUSH PRIVILEGES;
+    exit;
+
     sudo apt update
     sudo apt install wordpress php libapache2-mod-php mysql-server php-mysql
-
-    echo  " password \n SELECT * FROM USER" | mysql -u root -p
+    var/www/wordpress
+    # sudo su 
+    # mysql -u root -h localhost -p
+    # ALTER USER 'ubuntu'@'localhost' IDENTIFIED BY 'root';
+    # FLUSH PRIVILEGES;
     
+    echo "CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" | mysql -u root -proot
+
+
+    echo "CREATE DATABASE wordpress;" | sudo mysql -u root -iproot
+    echo "GRANT ALL ON wordpress.* TO wordpress@localhost IDENTIFIED BY 'password';" | sudo mysql -u root -iproot
+    echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
+
+sudo apt update
+sudo apt -y install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
+# sudo systemctl start apache2
+
+cd /tmp
+curl -O https://wordpress.org/latest.tar.gz
+sudo tar xzvf latest.tar.gz
+sudo touch /tmp/wordpress/.htaccess
+sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
+sudo mkdir /tmp/wordpress/wp-content/upgrade
+sudo cp -a /tmp/wordpress/. /var/www/wordpress
+
+sudo chown -R www-data:www-data /var/www/wordpress
+sudo find /var/www/wordpress/ -type d -exec chmod 750 {} \;
+sudo find /var/www/wordpress/ -type f -exec chmod 640 {} \;
+
+# LAMP
+
+sudo apt -y update 
+sudo apt -y install apache2
+sudo apt -y install mariadb-server mariadb-cilent
+sudo mysql_secure_installation
+sudo apt install -y php 
+sudo wget https://wordpress.org/latest.tar.gz -O /opt/latest.tar.gz
+sudo tar -xvf /opt/latest.tar.gz -C /var/www/html/
+sudo apt -y install php-mysql php-cgi php-cli php-gd
+sudo systemctl restart apache2
+sudo chown -R www-data:www-data /var/www/
+
+echo "CREATE DATABASE wordpress;" | sudo mysql -u root -iproot
+echo "GRANT ALL ON wordpress.* TO wordpress@localhost IDENTIFIED BY 'password';" | sudo mysql -u root -iproot
+echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
+
+    sudo ufw allow in "Apache"
+
+
+
+    sudo apt update
+    sudo apt -y .install wordpress php libapache2-mod-php mysql-server php-mysql
