@@ -143,6 +143,7 @@ do
         sudo apt update
         curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
         sudo apt -y install mariadb-server
+        sudo mysql_secure_installation
         sudo apt install phpmyadmin 
         sudo ln -s /usr/share/phpmyadmin /var/www/html
         sudo systemctl restart apache2
