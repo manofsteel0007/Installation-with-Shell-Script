@@ -11,12 +11,20 @@ do
     elif [ $var = "b" ]
     then
         curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
-        sudo apt install mariadb-server
+        sudo apt -y install mariadb-server
+        sudo mysql_secure_installation
+        sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo systemctl restart mariadb
+        RENAME USER 'sammy'@'localhost' TO 'sammy'@'remote_server_ip';
+        echo "CREATE USER 'sammy'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
+        echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
+        echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
         echo MariaDB installation completed
     elif [ $var = "c" ]
     then
         sudo apt update
-        sudo apt install python3.8
+        sudo apt install -y python3.8
         sudo apt install -y python3-pip
         sudo apt install -y python3-venv
         echo python3 installation completed
@@ -43,9 +51,8 @@ do
         sudo tar xzf /opt/wiki-js/wiki-js.tar.gz -C /opt/wiki-js/
         sudo rm /opt/wiki-js/wiki-js.tar.gz
         sudo mv /opt/wiki-js/config.sample.yml /opt/wiki-js/config.yml
-        sudo apt install nodejs
+        sudo apt install -y nodejs
         npm rebuild sqlite3
-        # sudo node /opt/wiki-js/server
         sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Wiki.js/wiki.service?token=AP6NT4XSFMTLXG3UVFUACATA5FKES -O /etc/systemd/system/wiki.service
         sudo systemctl daemon-reload
         sudo systemctl start wiki
@@ -83,9 +90,7 @@ do
 
         sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddyctl /usr/local/bin/
         sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy /usr/local/bin/
-        sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/systemd/maddy.service /etc/systemd/system/
-        sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/systemd/maddy@.service /etc/systemd/system/
-        
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Maddy/maddy.service?token=AP6NT4W5Q3AI5PDNVFT2M7LA54EMO -O /etc/systemd/system/maddy.service
         sudo useradd -mrU -s /sbin/nologin -d /var/lib/maddy -c "maddy mail server" maddy
 
         sudo systemctl daemon-reload
@@ -105,7 +110,7 @@ do
         sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Code-Server/code-server.service?token=AP6NT4TBAEHH4M4RTBBSX5LA5WPO4 -O /lib/systemd/system/code-server.service
         sudo systemctl start code-server
         sudo systemctl enable code-server
-        sudo ufw allow 8080/tcp
+        # sudo ufw allow 8080/tcp
 
         # sudo wget "LINK" -O /etc/nginx/sites-available/code-server.conf
         # sudo ln -s /etc/nginx/sites-available/code-server.conf /etc/nginx/sites-enabled/code-server.conf
@@ -115,6 +120,33 @@ do
         # sudo ufw reload
         # sudo certbot --nginx -d code-server."your-domain"
         echo Code Server installation completed
+    elif [ $var = "k" ]
+    then 
+        sudo apt -y update 
+        sudo apt -y install apache2
+        curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+        sudo apt -y install mariadb-server
+        sudo mysql_secure_installation
+        sudo apt install -y php 
+        sudo wget https://wordpress.org/latest.tar.gz -O /opt/latest.tar.gz
+        sudo tar -xvf /opt/latest.tar.gz -C /var/www/html/
+        sudo apt -y install php-mysql php-cgi php-cli php-gd
+        sudo systemctl restart apache2
+        sudo chown -R www-data:www-data /var/www/
+
+        echo "CREATE DATABASE wordpress;" | sudo mysql -u root -iproot
+        echo "GRANT ALL ON wordpress.* TO wordpress@localhost IDENTIFIED BY 'password';" | sudo mysql -u root -iproot
+        echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
+        echo Wordpress installation completed
+    elif [ $var = "l" ]
+    then 
+        sudo apt update
+        curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+        sudo apt -y install mariadb-server
+        sudo apt install phpmyadmin 
+        sudo ln -s /usr/share/phpmyadmin /var/www/html
+        sudo systemctl restart apache2
+        echo PhpMyAdmin installation completed
     fi
 done
 
