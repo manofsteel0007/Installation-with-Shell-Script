@@ -53,3 +53,11 @@ Maddy-Server will be installed
 Code-Server will be installed  
 
     sudo systemctl status code-server
+
+**Wordpress - k**
+
+Wordpress will be installed
+
+**PhpMyAdmin - l**
+
+PhpMyAdmin will be installed
