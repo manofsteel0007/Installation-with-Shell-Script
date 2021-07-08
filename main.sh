@@ -124,9 +124,20 @@ do
     then 
         sudo apt -y update 
         sudo apt -y install apache2
-        curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
-        sudo apt -y install mariadb-server
-        sudo mysql_secure_installation
+        check=$(service mariadb status | grep "running" | wc -l)
+        if [ $check == 0 ]
+        then
+            curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+            sudo apt -y install mariadb-server
+            sudo mysql_secure_installation
+            sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
+            sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+            sudo systemctl restart mariadb
+            RENAME USER 'sammy'@'localhost' TO 'sammy'@'remote_server_ip';
+            echo "CREATE USER 'sammy'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
+            echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
+            echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
+        fi
         sudo apt install -y php 
         sudo wget https://wordpress.org/latest.tar.gz -O /opt/latest.tar.gz
         sudo tar -xvf /opt/latest.tar.gz -C /var/www/html/
@@ -141,9 +152,20 @@ do
     elif [ $var = "l" ]
     then 
         sudo apt update
-        curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
-        sudo apt -y install mariadb-server
-        sudo mysql_secure_installation
+        check=$(service mariadb status | grep "running" | wc -l)
+        if [ $check == 0 ]
+        then
+            curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+            sudo apt -y install mariadb-server
+            sudo mysql_secure_installation
+            sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
+            sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+            sudo systemctl restart mariadb
+            RENAME USER 'sammy'@'localhost' TO 'sammy'@'remote_server_ip';
+            echo "CREATE USER 'sammy'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
+            echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
+            echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
+        fi
         sudo apt install phpmyadmin 
         sudo ln -s /usr/share/phpmyadmin /var/www/html
         sudo systemctl restart apache2

@@ -57,7 +57,7 @@
     sudo ln -s /usr/share/phpmyadmin /var/www/html
     sudo systemctl restart apache2
     
-# maddy-server
+# maddy-server 
 
     sudo mkdir /opt/maddy/ 
     sudo wget https://github.com/foxcpp/maddy/releases/download/v0.4.4/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar.zst
@@ -211,3 +211,11 @@ echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
 
     sudo apt update
     sudo apt -y .install wordpress php libapache2-mod-php mysql-server php-mysql
+
+    sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
+    sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+    sudo systemctl restart mariadb
+    RENAME USER 'sammy'@'localhost' TO 'sammy'@'remote_server_ip';
+    echo "CREATE USER 'sammy'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
+    echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
+    echo "FLUSH PRIVILEGES;" |sudo mysql -u root -iproot
