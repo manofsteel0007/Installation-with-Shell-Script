@@ -86,7 +86,7 @@ do
         openssl req -new -x509 -days 365 -nodes \
         -out /etc/maddy/certs/fullchain.pem \
         -keyout /etc/maddy/certs/private.pem \
-        -subj "/C=IN/ST=TamilNadu/L=India/O=IT/CN= ubuntu@localhost"
+        -subj "/C=IN/ST=TamilNadu/L=India/O=IT/CN= ubuntu.localhost"
 
         sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddyctl /usr/local/bin/
         sudo mv /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy /usr/local/bin/
