@@ -79,7 +79,7 @@ do
         sudo tar -xvf /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar -C /opt/maddy/
         sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl.tar
         sudo rm /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf 
-        sudo wget https://github.com/manofsteel0007/Installation-with-Shell-Script/raw/master/Maddy/maddy.conf -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Maddy/maddy.conf?token=AP6NT4SU24XE5FOGD7XEXITA6LHGE -O /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
         sudo mkdir /etc/maddy/
         sudo mkdir /etc/maddy/certs/
         sudo hostnamectl set-hostname ubunut.localhost
