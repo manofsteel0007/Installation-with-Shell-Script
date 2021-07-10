@@ -83,7 +83,7 @@ do
         sudo mkdir /etc/maddy/
         sudo mkdir /etc/maddy/certs/
         sudo hostnamectl set-hostname ubunut.localhost
-        openssl req -new -x509 -days 365 -nodes \
+        sudo openssl req -new -x509 -days 365 -nodes \
         -out /etc/maddy/certs/fullchain.pem \
         -keyout /etc/maddy/certs/private.pem \
         -subj "/C=IN/ST=TamilNadu/L=India/O=IT/CN= ubuntu.localhost"
