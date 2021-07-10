@@ -4,7 +4,7 @@ Description=Maddy Mail server
 [Service]
 Type=simple
 User=ubuntu
-ExecStart=sudo /etc/maddy/maddy --config /etc/maddy/maddy.conf
+ExecStart=sudo /usr/local/bin/maddy --config /opt/maddy/maddy-0.4.4+dcdf4a7-x86_64-linux-musl/maddy.conf
 Restart=on-failure
 
 [Install]
