@@ -102,12 +102,12 @@ do
         sudo apt -y install nginx
         sudo mkdir /opt/code-server/
         sudo wget https://github.com/cdr/code-server/releases/download/v3.3.1/code-server-3.3.1-linux-amd64.tar.gz -O /opt/code-server/code-server-3.3.1-linux-amd64.tar.gz
-        sudo tar -xvf code-server-3.3.1-linux-amd64.tar.gz -C /opt/code-server/
+        sudo tar -xvf /opt/code-server/code-server-3.3.1-linux-amd64.tar.gz -C /opt/code-server/
         sudo rm /opt/code-server/code-server-3.3.1-linux-amd64.tar.gz
         sudo sudo cp -r /opt/code-server/code-server-3.3.1-linux-amd64 /usr/lib/code-server
         sudo ln -s /usr/lib/code-server/bin/code-server /usr/bin/code-server
         sudo mkdir /var/lib/code-server
-        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Code-Server/code-server.service?token=AP6NT4TBAEHH4M4RTBBSX5LA5WPO4 -O /lib/systemd/system/code-server.service
+        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/Code-Server/code-server.service?token=AP6NT4TECXRNYXMWGMWJEDTA7RX6W -O /lib/systemd/system/code-server.service
         sudo systemctl start code-server
         sudo systemctl enable code-server
         # sudo ufw allow 8080/tcp
