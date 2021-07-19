@@ -13,9 +13,10 @@ do
         curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
         sudo apt -y install mariadb-server
         sudo mysql_secure_installation
-        sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
-        sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
         sudo systemctl restart mariadb
+        # sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
+        # sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+        # sudo systemctl restart mariadb
         # echo "RENAME USER 'root'@'localhost' TO 'root'@'remote_server_ip';" | sudo mysql -u root -iproot
         # echo "CREATE USER 'root'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
         # echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'root'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
@@ -133,6 +134,7 @@ do
             sudo systemctl restart mariadb
             # sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
             # sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf
+            # sudo systemctl restart mariadb
             # echo "RENAME USER 'root'@'localhost' TO 'root'@'remote_server_ip';" | sudo mysql -u root -iproot
             # echo "CREATE USER 'root'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
             # echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'root'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
@@ -161,6 +163,7 @@ do
             sudo systemctl restart mariadb
             # sudo rm /etc/mysql/mariadb.conf.d/50-server.cnf
             # sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/50-server.cnf?token=AP6NT4W3LFFINNPT7ZO6I5LA6BOAK -O /etc/mysql/mariadb.conf.d/50-server.cnf            
+            # sudo systemctl restart mariadb
             # echo "RENAME USER 'root'@'localhost' TO 'root'@'remote_server_ip';" | sudo mysql -u root -iproot
             # echo "CREATE USER 'root'@'remote_server_ip' IDENTIFIED WITH mysql_native_password BY 'password';" | sudo mysql -u root -iproot
             # echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'root'@'remote_server_ip' WITH GRANT OPTION;" | sudo mysql -u root -iproot
