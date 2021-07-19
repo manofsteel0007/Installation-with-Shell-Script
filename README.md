@@ -2,7 +2,7 @@
 
 **Download the script**
 
-    sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/main.sh?token=AP6NT4V5WKQ4HRL57LBXTSLA5ZYRW
+    sudo wget https://raw.githubusercontent.com/manofsteel0007/Installation-with-Shell-Script/master/main.sh?token=AP6NT4V5WKQ4HRL57LBXTSLA5ZYRW -O ./main.sh
     sudo chmod +x main.sh
     sudo ./main.sh #(add letter corresponding to the software you want with spacing)
 
